@@ -26,14 +26,14 @@ class CommandRunner(object):
         self.screen_id = 'screen-0'
         self.stored_opt = {'detail': False}
 
-    # Print action list table
+    # print(action list table)
     def print_action_table(self, pagedata, detail=None, mode=None):
         actions = pagedata['actions'] if 'actions' in pagedata else []
         header = ['No.','WIDGET', 'RESOURCE-ID', 'CONTENT-DESC', 'TEXT', 'BOUNDS','ACTION', 'CONTEXT']
         if mode == 'dev':
             header = ['No.', 'DESC', 'LABEL', 'ACTION', 'BOUNDS', 'CONTEXT']
 
-        print '\n'
+        print('\n')
         table = []
         keys = header[1:-1]
         if self.stored_opt['detail'] or detail == 'd':
@@ -64,14 +64,14 @@ class CommandRunner(object):
                 table.append(row)
 
         at = AsciiTable(table, title="Action List")
-        print at.table
-        print '\n'
+        print(at.table)
+        print('\n')
 
-    # Print action group list table
+    # print(action group list table)
     def print_action_group_table(self, pagedata):
         action_groups = pagedata['action_groups'] if 'action_groups' in pagedata else []
 
-        print '\n'
+        print('\n')
         table = []
         header = ['TYPE', 'DESC', 'LABEL', 'PRE', 'FINAL']
         table.append(header)
@@ -82,8 +82,8 @@ class CommandRunner(object):
 
         at = AsciiTable(table, title="Action Groups")
         # at.inner_row_border = True
-        print at.table
-        print '\n'
+        print(at.table)
+        print('\n')
 
     def touch_back_btn(self, data):
         if data['now_context_num'] != 0:
@@ -106,8 +106,8 @@ class CommandRunner(object):
 
         data['driver'].save_screenshot(png_filename)
         data['driver'].switch_to.context(orig_context)
-        print '# Screen Shot Save OK'
-        print '%s' % png_filename
+        print('# Screen Shot Save OK')
+        print('%s' % png_filename)
 
     def xml_doc_save(self, data, idx=None):
         if data['now_context_num'] != 0:
@@ -121,8 +121,8 @@ class CommandRunner(object):
         with codecs.open(xml_filename, 'w', 'utf-8') as xml_file:
             xml = data['driver'].page_source
             xml_file.write(xml)
-        print '# XML File Save OK'
-        print '%s' % xml_filename
+        print('# XML File Save OK')
+        print('%s' % xml_filename)
 
     def html_doc_save(self, data, idx=None):
         for c in data['driver'].contexts:
@@ -135,22 +135,22 @@ class CommandRunner(object):
                 html_filename = os.path.join(data['doc_save_dir'], filename)
                 with codecs.open(html_filename, 'w', 'utf-8') as html_file:
                     html_file.write(data['driver'].page_source)
-        print '# HTML File Save OK'
-        print '%s' % html_filename
+        print('# HTML File Save OK')
+        print('%s' % html_filename)
 
 
     # if result is true, finish test
     def do_command(self, data):
         extra_sleep=0
-        print "\n# About Manual Test Command - Enter 'help' or 'h' "
+        print("\n# About Manual Test Command - Enter 'help' or 'h' ")
 
-        print '[Current Context : %s]' % data['driver'].context
+        print('[Current Context : %s]' % data['driver'].context)
         promp = '\n[App-Manual-Test] Input Action Number #%d >> ' % self.line_num
 
         self.line_num = self.line_num + 1
         self.screen_id = 'screen-' + str(self.line_num)
         choice = raw_input(promp).strip()
-        print "Selected Command: %s" % str(choice)
+        print("Selected Command: %s" % str(choice))
 
         idx = None
         try:
@@ -161,9 +161,9 @@ class CommandRunner(object):
 
             elif command.is_page_source(choice):
                 i = 0
-                print "\nChoose Contexts List to bottom:"
+                print("\nChoose Contexts List to bottom:")
                 for c in data['contexts']:
-                    print "%d. %s" % (i, c)
+                    print("%d. %s" % (i, c))
                     i = i + 1
 
                 c_num = raw_input('\nContexts Number >> ')
@@ -176,9 +176,9 @@ class CommandRunner(object):
                 orig_context = data['contexts'][now_context_num]
                 data['driver'].switch_to.context(data['contexts'][int(c_num)])
                 soup = BeautifulSoup(data['driver'].page_source, bs4_type)
-                print '\n'
-                print soup.prettify
-                print '\n'
+                print('\n')
+                print(soup.prettify)
+                print('\n')
 
                 data['driver'].switch_to.context(orig_context)
                 return False
@@ -229,7 +229,7 @@ class CommandRunner(object):
                 idx= -1
 
             elif command.is_exit(choice):
-                print 'Terminate Manual Test Mode.\n'
+                print('Terminate Manual Test Mode.\n')
                 return True
 
             else:
@@ -240,14 +240,14 @@ class CommandRunner(object):
             return self.do_command(data)
 
         if idx >= len(data['actions']):
-            print 'Enter the correct number.'
+            print('Enter the correct number.')
             return self.do_command(data)
 
 
         ### do action
         action = data['actions'][idx]
         if action is None:
-            print 'Enter the correct number.'
+            print('Enter the correct number.')
             return False
 
         if action['type'] == native_manager.NATIVE_CONTEXT:

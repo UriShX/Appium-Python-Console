@@ -13,5 +13,5 @@ if __name__ == "__main__":
         suite = unittest.TestLoader().loadTestsFromTestCase(AppiumPythonConsole)
         unittest.TextTestRunner(verbosity=2).run(suite)
     except:
-        print traceback.format_exc()
+        print(traceback.format_exc())
         pass

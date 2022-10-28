@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import re, sys
+import re, sys, importlib
 from math import hypot, atan2, degrees, pi as PI
 import numpy as np
-reload(sys)
-sys.setdefaultencoding('utf-8')
+importlib.reload(sys)
 
 class DistMatrix(object):
     #vec: array of Point

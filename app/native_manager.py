@@ -41,8 +41,8 @@ class ActionExecutor(object):
         bounds = Bounds.to_bounds(self.action['bounds'])
         val = bounds.to_touch_val()
 
-        print ( '# Selected Click Action >> %s' % self.to_action_info() )
-        print '=' * 80
+        print(( '# Selected Click Action >> %s' % self.to_action_info() ))
+        print('=' * 80)
 
         touch = TouchAction(self.driver)
         touch.tap(x=val.x, y=val.y).perform()
@@ -53,8 +53,8 @@ class ActionExecutor(object):
         bounds = Bounds.to_bounds(self.action['bounds'])
         val = bounds.to_scroll_val()
 
-        print ( '# Selected Scroll Action >> %s' % self.to_action_info() )
-        print '=' * 80
+        print(( '# Selected Scroll Action >> %s' % self.to_action_info() ))
+        print('=' * 80)
 
         self.driver.swipe(val.p1.x, val.p1.y, val.p2.x, val.p2.y, 3000)
         sleep(1)
@@ -65,8 +65,8 @@ class ActionExecutor(object):
         bounds = Bounds.to_bounds(self.action['bounds'])
         val = bounds.to_swipe_val()
 
-        print ( '# Selected Swipe Action >> %s' % self.to_action_info() )
-        print '=' * 80
+        print(( '# Selected Swipe Action >> %s' % self.to_action_info() ))
+        print('=' * 80)
 
         self.driver.swipe(val.p1.x, val.p1.y, val.p2.x, val.p2.y)
         sleep(1)
@@ -78,13 +78,13 @@ class ActionExecutor(object):
         if el is None:
             return False
 
-        print ( '# Selected Input Action >> %s' % self.to_action_info() )
+        print(( '# Selected Input Action >> %s' % self.to_action_info() ))
         input_val = ""
         if 'value' in self.action and self.action['value'] is not None:
             input_val = self.action['value']
         else:
             input_val = raw_input("# Enter the Input Value >> ").decode(_stdin_encoding)
-        print '=' * 80
+        print('=' * 80)
         el.click()
         el.set_text(input_val)
         sleep(1)
@@ -95,8 +95,8 @@ class ActionExecutor(object):
         if el is None:
             return False
 
-        print ( '# Selected Checkbox Action >> %s' % self.to_action_info() )
-        print '=' * 80
+        print(( '# Selected Checkbox Action >> %s' % self.to_action_info() ))
+        print('=' * 80)
 
         el.click()
         sleep(1)
@@ -176,7 +176,7 @@ def xml_doc_save(self, data):
     with codecs.open(xml_filename, 'w', 'utf-8') as xml_file:
         xml = data['driver'].page_source
         xml_file.write(xml)
-    print '# XML File Save OK'
+    print('# XML File Save OK')
     return xml
 
 
@@ -207,7 +207,7 @@ def get_actions(driver, xml, without_webview=True, context='NATIVE_APP'):
     if has_visible_node(soup):
         clean_invisible_nodes(soup.hierarchy)
 
-    # print str(soup)
+    # print(str(soup))
     action_table = ActionTable( str(soup) ).to_table()
 
     #action_table to actions
@@ -233,7 +233,7 @@ def get_actions_only_native(driver, xml, context='NATIVE_APP'):
     if has_visible_node(soup):
         clean_invisible_nodes(soup.hierarchy)
 
-    # print str(soup)
+    # print(str(soup))
     action_table = ActionTable( str(soup) ).to_table()
 
     #action_table to actions
@@ -254,7 +254,7 @@ def get_actions_only_native(driver, xml, context='NATIVE_APP'):
 def exec_action(data, idx):
     action = data['actions'][idx]
     if action['type'] != NATIVE_CONTEXT:
-        print "Action is not native type: %s" % str(action)
+        print("Action is not native type: %s" % str(action))
         return False
 
     action_type = action['action']
@@ -269,18 +269,18 @@ def exec_action(data, idx):
 
 def get_window_list(data):
     driver = data['driver']
-    print '# CURRENT_WINDOW', driver.current_window_handle
+    print('# CURRENT_WINDOW', driver.current_window_handle)
     i = 0
     w = driver.window_handles
     for h in w:
-        print '# Window %d: %s' % (i, h)
+        print('# Window %d: %s' % (i, h))
         i = i + 1
 
     driver.switch_to_window(w[1])
-    print '# CURRENT_WINDOW (s)', driver.current_window_handle
+    print('# CURRENT_WINDOW (s)', driver.current_window_handle)
     sleep(2)
     driver.switch_to_default_content()
-    print '# CURRENT_WINDOW (d)', driver.current_window_handle
+    print('# CURRENT_WINDOW (d)', driver.current_window_handle)
     return driver.window_handles
 
 
@@ -303,7 +303,7 @@ def do_action(data):
     choice = raw_input('\n# Input Action Number >> ')
 
     if choice == 'exit':
-        print 'exit'
+        print('exit')
         return False
 
     idx = None
@@ -315,7 +315,7 @@ def do_action(data):
             wlist = get_window_list(data)
             return True
         else:
-            print 'exit'
+            print('exit')
             return False
 
     # do action

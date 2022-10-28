@@ -88,10 +88,10 @@ def uiautomator2_server_patch(config):
         popen = subprocess.Popen(patch, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         (stdoutdata, stderrdata) = popen.communicate()
         if stderrdata != '':
-            print "\nPatch Failed: %s" % patch
+            print("\nPatch Failed: %s" % patch)
 
 def clean(self):
-    print "Device cleaning....."
+    print("Device cleaning.....")
     cleans = [
         self.adb_cmd + ' uninstall io.appium.uiautomator2.server',
         self.adb_cmd + ' uninstall io.appium.uiautomator2.server.test',
@@ -102,12 +102,12 @@ def clean(self):
         popen = subprocess.Popen(clean, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         (stdoutdata, stderrdata) = popen.communicate()
         if stderrdata != '':
-            print "\nClean Failed: %s" % clean
+            print("\nClean Failed: %s" % clean)
 
     home_key = self.adb_cmd + ' shell input keyevent KEYCODE_HOME'
     popen = subprocess.Popen(home_key, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     (stdoutdata, stderrdata) = popen.communicate()
     if stderrdata != '':
-        print "\nadb command Failed: %s" % home_key
+        print("\nadb command Failed: %s" % home_key)
     else:
-        print "OK"
+        print("OK")

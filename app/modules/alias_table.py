@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import sys, re, csv, codecs
+import sys, re, csv, codecs, importlib
 import editdistance
-reload(sys)
-sys.setdefaultencoding('utf-8')
+importlib.reload(sys)
 
-def codecs_open(file_path, mode='rb', encoding='utf-8'):
-    with codecs.open(file_path, 'rb', encoding='utf-8') as f:
+
+def codecs_open(file_path, mode='r', encoding='utf-8'):
+    with codecs.open(file_path, 'r', encoding='utf-8') as f:
         for line in f:
             yield line.encode(encoding)
 

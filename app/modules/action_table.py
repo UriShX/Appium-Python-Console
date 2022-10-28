@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-import os, sys, csv
+import os, sys, csv, importlib
+
+script_dir = os.path.dirname( __file__ )
+sys.path.append( script_dir )
+
 from bs4 import BeautifulSoup, Tag
 from rect import Bounds, Point, DistMatrix
 from labeled_action import LabeledAction
 from labeled_group import LabeledGroup
 from tokenizer import Tokenizer
 from webview_element import WebviewElement
-reload(sys)
-sys.setdefaultencoding('utf-8')
+importlib.reload(sys)
 
 class ActionTable(object):
     NOT_TOUCHIABLE_WIDGETS = [
@@ -362,7 +365,7 @@ class ActionTable(object):
 
         # if element['bounds'] == '[45,1617][120,1692]':
         #     for c in action.label_elements:
-        #         print "%s, %s, %s" % (c['bounds'], c['pos'], c['label'])
+        #         print("%s, %s, %s" % (c['bounds'], c['pos'], c['label']))
         return action
 
 
@@ -469,9 +472,9 @@ class ActionTable(object):
         return False
 
     def find_traversal_after(self, action):
-        # print "----------------"
-        # print action
-        # print "---"
+        # print("----------------")
+        # print(action)
+        # print("---")
         for action_after in self.action_list:
             if action_after == action:
                 continue
@@ -483,7 +486,7 @@ class ActionTable(object):
                 continue
 
             if self._is_traversal_after(action, action_after):
-                # print "1 => %s" % action_after
+                # print("1 => %s" % action_after)
                 return action_after
 
         return None

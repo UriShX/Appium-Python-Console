@@ -12,7 +12,7 @@ def is_help( arg):
     cmd = command['HELP']['cmd']
     if arg in cmd:
         for value in command.itervalues():
-            print ( '%30s : %s' % (', '.join(value['cmd']), value['desc']) )
+            print(( '%30s : %s' % (', '.join(value['cmd']), value['desc']) ))
         return True
     else:
         return False

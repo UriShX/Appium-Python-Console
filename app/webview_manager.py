@@ -74,27 +74,27 @@ def exec_action(data, idx):
 
     # do action
     if action_type == 'input':
-        print ( '# Selected Input_%s Action >> %03d. %s - %s %s' % (action_type, idx, str(action_type), str(target_element.tag_name), target_element.text) )
+        print(( '# Selected Input_%s Action >> %03d. %s - %s %s' % (action_type, idx, str(action_type), str(target_element.tag_name), target_element.text) ))
         if 'value' in action and action['value'] is not None:
             input_val = action['value']
         else:
             input_val = raw_input("# Enter the Input Value >> ").decode(_stdin_encoding)
-        print '=' * 80
+        print('=' * 80)
         data['driver'].execute_script('arguments[0].value = arguments[1];', action['target'], input_val)
 
     elif action_type == 'spinner':
-        print ( '# Selected Spinner Action >> %03d. %s - %s %s' % (idx, str(action_type), str(target_element.tag_name), target_element.text) )
-        print '=' * 80
+        print(( '# Selected Spinner Action >> %03d. %s - %s %s' % (idx, str(action_type), str(target_element.tag_name), target_element.text) ))
+        print('=' * 80)
         target_element.click()
 
     elif action_type == 'input' and input_type in input_type_etc_list:
-        print ( '# Selected Input_%s Action >> %03d. %s - %s %s' % (action_type, idx, str(action_type), str(target_element.tag_name), target_element.text) )
-        print '=' * 80
+        print(( '# Selected Input_%s Action >> %03d. %s - %s %s' % (action_type, idx, str(action_type), str(target_element.tag_name), target_element.text) ))
+        print('=' * 80)
         target_element.click()
 
     elif action_type == 'click' or action_type == 'checkbox':
-        print ( '# Selected Execute_Script Click Action >> %03d. %s - %s %s' % (idx, str(action_type), str(target_element.tag_name), target_element.text) )
-        print '=' * 80
+        print(( '# Selected Execute_Script Click Action >> %03d. %s - %s %s' % (idx, str(action_type), str(target_element.tag_name), target_element.text) ))
+        print('=' * 80)
         data['driver'].execute_script('if(!arguments[0].checked) { arguments[0].click(); }', action['target'])
 
     return True

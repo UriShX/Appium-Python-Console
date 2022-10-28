@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-import os,sys
+import os, sys, importlib
 from bs4 import BeautifulSoup
 from app.modules.rect import Bounds, Point
 
 from alias_table import AliasTable
-reload(sys)
-sys.setdefaultencoding('utf-8')
+importlib.reload(sys)
+
 
 class LabeledElement(object):
     ___CUR_FILE_PATH = os.path.dirname(os.path.realpath(__file__))

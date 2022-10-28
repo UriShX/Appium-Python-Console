@@ -29,17 +29,17 @@ HELP_MSG = """
 
 ** HELP ***
 
- help()                  : Help. Print all available APC commands and methods
+ help()                  : Help. print(all available APC commands and methods)
  clear()                 : Clear Console.  (Similar to 'clear' command in terminal)
  exit()                  : Terminate Console Program
 
- page()                  : Print XML of current mobile page.
+ page()                  : print(XML of current mobile page.)
                            It prints DOM of current pages showing Resource-id, Content-desc, Text, Action(Clickable, Scrollable)
- action_table()          : Print action table of current page.
+ action_table()          : print(action table of current page.)
                            Action table is simplified view of current XML where row in the table represents only actionable XML element
     Usage :
-        action_table() - Print "Class, Resource-id, Content-desc, Text, Bounds, Action Type, Context" columns
-        action_table('d') - Print above columns with Xpath.
+        action_table() - print("Class, Resource-id, Content-desc, Text, Bounds, Action Type, Context" columns)
+        action_table('d') - print(above columns with Xpath.)
 
  manual_test(mode='h')   : Enter manual test mode, where you can interact with APC with simple-and-guided command.
         mode='n' - Action table view is created by UIAutomator only [Default]
@@ -59,9 +59,9 @@ HELP_MSG = """
 """
 
 command = {
-    'HELP'                  : { 'cmd': ['help', 'h'], 'desc': 'Help. Print all available Manual Test Mode commands' },
+    'HELP'                  : { 'cmd': ['help', 'h'], 'desc': 'Help. print all available Manual Test Mode commands' },
     'PAGE'                  : { 'cmd': ['page_source', 'p'], 'desc': 'Appium WebDriver\'s page_source' },
-    'DETAIL'                : { 'cmd': ['detail', 'd'], 'desc': 'Print Action Table with Xpath' },
+    'DETAIL'                : { 'cmd': ['detail', 'd'], 'desc': 'print Action Table with Xpath' },
     'BACK'                  : { 'cmd': ['back', 'b'], 'desc': 'Mobile Back Button' },
     'REFRESH'               : { 'cmd': ['refresh', 'r'], 'desc': 'Retry ' },
     'SCROLL_UP'             : { 'cmd': ['sup', 'scrollup', 'up'], 'desc': 'Scroll UP' },

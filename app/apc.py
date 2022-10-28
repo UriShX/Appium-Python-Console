@@ -1,6 +1,10 @@
 #-*- coding: utf-8 -*-
 
 import unittest, time, sys, os, re, imp, glob, subprocess, platform, code, codecs, traceback, pydoc, pprint, inspect, types
+
+script_dir = os.path.dirname( __file__ )
+sys.path.append( script_dir )
+
 import driver_setup, en, ko
 import native_manager, webview_manager
 
@@ -59,7 +63,7 @@ class AppiumPythonConsole(unittest.TestCase):
             code.interact(self.BANNER.encode(sys.stdout.encoding, 'ignore'), readfunc=self._read_func(), local = self.cmd)
         except SystemExit:
             self.finish = True
-            print "Terminate APC.."
+            print("Terminate APC..")
 
     # Code.interact's readfunc
     #   Write the '--mode=m' option on executing main.py
@@ -74,7 +78,7 @@ class AppiumPythonConsole(unittest.TestCase):
 
     # HELP Command
     def _help(self):
-        print self.HELP
+        print(self.HELP)
 
     # Clear Console Command
     def _clear(self):
@@ -93,7 +97,7 @@ class AppiumPythonConsole(unittest.TestCase):
             while(not self.finish):
                 self.finish = self.collect_actions()
         except:
-            print traceback.format_exc()
+            print(traceback.format_exc())
 
     # Page Command
     def _page(self, cond=None):
@@ -104,20 +108,20 @@ class AppiumPythonConsole(unittest.TestCase):
         els = soup.find_all(self.has_id_desc_bounds_text)
         for e in els:
             if str(e.attrs['class']) is not '':
-                print "\n\001\033[4;32m\002%s\001\033[0m\002" % e.attrs["class"]
+                print("\n\001\033[4;32m\002%s\001\033[0m\002" % e.attrs["class"])
             if str(e.attrs['resource-id']) is not '':
-                print "  id: %s" % e.attrs["resource-id"]
+                print("  id: %s" % e.attrs["resource-id"])
             if str(e.attrs['content-desc']) is not '':
-                print "  desc: %s" % e.attrs["content-desc"]
+                print("  desc: %s" % e.attrs["content-desc"])
             if str(e.attrs['text']) is not '':
-                print "  text: %s" % e.attrs["text"]
+                print("  text: %s" % e.attrs["text"])
             if str(e.attrs['bounds']) is not '':
-                print "  bounds: %s" % e.attrs["bounds"]
+                print("  bounds: %s" % e.attrs["bounds"])
             if str(e.attrs['clickable']) == 'true':
-                print "  \001\033[90m\002clickable: %s\001\033[0m\002" % e.attrs["clickable"]
+                print("  \001\033[90m\002clickable: %s\001\033[0m\002" % e.attrs["clickable"])
             if str(e.attrs['scrollable']) == 'true':
-                print "  \001\033[90m\002scrollable: %s\001\033[0m\002" % e.attrs["scrollable"]
-        print '\n'
+                print("  \001\033[90m\002scrollable: %s\001\033[0m\002" % e.attrs["scrollable"])
+        print('\n')
 
         self.restore_context(orig_c)
 
@@ -136,27 +140,27 @@ class AppiumPythonConsole(unittest.TestCase):
     # Appium Driver's Methods display Command
     def _methods(self, item=None):
         idx = 0
-        print '\n'
+        print('\n')
         if item is not None:
             name, args, usage = self.get_methods_info(METHODS[item])
-            print "[%3d] \001\033[35m\002%s\001\033[0m\002%s" % (item, name, args)
+            print("[%3d] \001\033[35m\002%s\001\033[0m\002%s" % (item, name, args))
             if "Desc" in METHODS[item].keys():
-                print "\n      Desc :"
+                print("\n      Desc :")
                 for d in METHODS[item]["Desc"]:
-                    print "        %s" % d
+                    print("        %s" % d)
             if "Args" in METHODS[item].keys():
-                print "\n      Args :"
+                print("\n      Args :")
                 for key,value in METHODS[item]["Args"].items():
-                    print "        %s : %s" % (key, value)
+                    print("        %s : %s" % (key, value))
             if "Usage" in METHODS[item].keys():
-                print "\n      Usage :"
-                print "        %s" % (METHODS[item]["Usage"])
+                print("\n      Usage :")
+                print("        %s" % (METHODS[item]["Usage"]))
         else:
             for m in METHODS:
                 name, args, usage = self.get_methods_info(m)
-                print "[%3d] \001\033[35m\002%40s\001\033[0m\002%s" % (idx, name, args)
+                print("[%3d] \001\033[35m\002%40s\001\033[0m\002%s" % (idx, name, args))
                 idx = idx + 1
-        print '\n'
+        print('\n')
 
     def get_methods_info(self, methods):
         name = ""
@@ -176,22 +180,22 @@ class AppiumPythonConsole(unittest.TestCase):
 
     def set_context_to_native(self):
         orig_c = self.driver.context
-        print 'Current Context is "%s"' % orig_c
+        print('Current Context is "%s"' % orig_c)
         if orig_c != 'NATIVE_APP':
-            print 'Switch to "NATIVE_APP" Context'
+            print('Switch to "NATIVE_APP" Context')
             self.driver.switch_to.context('NATIVE_APP')
         return orig_c
 
     def restore_context(self, orig_c):
         if orig_c != 'NATIVE_APP':
-            print 'Switch to "%s" Context' % orig_c
+            print('Switch to "%s" Context' % orig_c)
             self.driver.switch_to.context(orig_c)
 
     def _rlcomplete(self, param):
         try:
             import readline
         except ImportError:
-            print "Module readline not available."
+            print("Module readline not available.")
         else:
             import rlcompleter
             readline.set_completer(rlcompleter.Completer(param).complete)
@@ -315,7 +319,7 @@ class AppiumPythonConsole(unittest.TestCase):
                         cnt = cnt + 1
                 if len(actions['actions']) > 0:
                     avg = int(float(cnt) / len(actions['actions']) * 100)
-                    # print '@@@@@@@@ AVG:', avg
+                    # print('@@@@@@@@ AVG:', avg)
                     if avg > max_avg:
                         max_avg = avg
                         max_actions = actions
@@ -330,7 +334,7 @@ class AppiumPythonConsole(unittest.TestCase):
         png_filename = os.path.join(self.doc_save_dir, filename)
 
         self.driver.save_screenshot(png_filename)
-        print '# Screen Shot Save OK'
+        print('# Screen Shot Save OK')
 
     def xml_doc_save(self):
         filename = '%s.xml' % (self.command_runner.screen_id)
@@ -340,7 +344,7 @@ class AppiumPythonConsole(unittest.TestCase):
             xml = self.driver.page_source
             xml_file.write(xml)
 
-        print '# XML Save OK'
+        print('# XML Save OK')
         return xml
 
     def html_doc_save(self):
@@ -349,4 +353,4 @@ class AppiumPythonConsole(unittest.TestCase):
         with codecs.open(html_filename, 'w', 'utf-8') as html_file:
             html_file.write(self.driver.page_source)
 
-        print '# HTML Save OK'
+        print('# HTML Save OK')
