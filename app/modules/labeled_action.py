@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
-import os,sys
+import os, sys, importlib
 from bs4 import BeautifulSoup
 from app.modules.rect import Bounds, Point
 
 from labeled_element import LabeledElement
 from webview_element import WebviewElement
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+importlib.reload(sys)
 
 class LabeledAction(LabeledElement):
     def __init__(self, element, atype, no):

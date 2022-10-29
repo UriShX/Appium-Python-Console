@@ -20,9 +20,9 @@ class AliasTable(object):
         self.load_alias()
 
     def load_alias(self):
-        reader = csv.reader(codecs_open(self.alias_file, encoding='utf-8'), delimiter=',', quotechar='"')
+        reader = csv.reader(self.alias_file, delimiter=',', quotechar='"')
         for row in reader:
-            alias = row[0].strip().decode('utf-8')
+            alias = row[0].strip()
             if len(alias) <= 0:
                 continue
 

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import re, sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+import re, sys, importlib
+
+importlib.reload(sys)
 
 class Tokenizer(object):
     CLEAN_WORKDS = [

@@ -1,12 +1,12 @@
 #-*- coding: utf-8 -*-
 
-import traceback, unittest, sys
+import traceback, unittest, sys, importlib
 from app.apc import AppiumPythonConsole
 import app.command as command
 import app.ko as ko
 
-reload(sys)  # Reload does the trick!
-sys.setdefaultencoding('UTF8')
+importlib.reload(sys)
+
 
 if __name__ == "__main__":
     try:

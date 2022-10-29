@@ -481,7 +481,7 @@ METHODS = [
     {
         "Name": "touch_id(self, match)",
         "Desc": [
-            "Do a fingerprint(scan")
+            "Do a fingerprint scan"
         ]
     },
 

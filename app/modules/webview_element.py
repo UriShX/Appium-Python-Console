@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+import sys, importlib
+importlib.reload(sys)
+
 
 class WebviewElement(object):
     def __init__(self, element):

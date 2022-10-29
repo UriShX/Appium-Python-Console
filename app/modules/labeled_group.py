@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-import os,sys
+import os, sys, importlib
 from bs4 import BeautifulSoup
 from app.modules.rect import Bounds, Point
 
 from labeled_element import LabeledElement
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+importlib.reload(sys)
 
 class LabeledGroup(LabeledElement):
     #group: {'gtype':'selection|sequence', 'pre':[LabeledAction, ...], 'final':[(LabeledAction, {'a': angle, 'p':pos, 'd':distnace}), ...]}
